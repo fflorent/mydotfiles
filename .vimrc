@@ -32,6 +32,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'jaxbot/github-issues.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'fugitive.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'fabi1cazenave/suckless.vim'
 
 filetype plugin indent on    " required
 
@@ -39,6 +41,7 @@ vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call
 " map <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
 map <C-Left> b
 map <C-Right> e
+syn on
 
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 \ "\<lt>C-n>" :
@@ -47,9 +50,7 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 
 nmap <Backspace> X
-map <F10> <NOP>
 let tern_request_timeout=10
-execute pathogen#infect()
 
 "Unite
 nnoremap <C-P> :Unite -start-insert file_rec/async<cr>
