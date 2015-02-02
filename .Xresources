@@ -1,0 +1,5 @@
+XTerm*eightBitInput: false
+URxvt.perl-ext-common: default,clipboard,potoman
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped

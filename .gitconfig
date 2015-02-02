@@ -1,0 +1,30 @@
+[user]
+	name = Florent FAYOLLE
+	email = florent.fayolle69@gmail.com
+[merge]
+	tool = vimdiff
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(blue)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ci = commit
+	cp = cherry-pick
+	co = checkout
+	dc = diff --cached
+	st = status
+	dfm = diff origin/master
+	ms = merge --squash --no-commit
+	amend = commit --amend
+	rfp = log -p @{u}..
+	lgm = log origin/master..
+	msq = !git ms
+[log]
+	decorate = full
+[color "diff"]
+	commit = magenta
+[core]
+	excludesfile = /home/florent/.config/git/ignore
+	editor = vim
+	pager = less
+[push]
+	default = simple
+[color]
+	ui = auto
