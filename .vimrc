@@ -34,7 +34,9 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'fugitive.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fabi1cazenave/suckless.vim'
+Plugin 'junegunn/vim-peekaboo'
 
+call vundle#end()
 filetype plugin indent on    " required
 
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
@@ -58,6 +60,7 @@ nnoremap <space>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
 
+let g:peekaboo_window = 'vertical botright 30new'
 "highlight SpecialKey ctermfg=DarkGray ctermbg=yellow
 
 
