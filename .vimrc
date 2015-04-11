@@ -91,10 +91,6 @@ nnoremap <space>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
 
-" make YCM compatible with UltiSnips
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -152,24 +148,17 @@ if has("gui_running")
 	set cursorline
 endif
 
-" autocmd VimEnter * silent !konsoleprofile UseCustomCursorColor=1
-" Entering insertion mode
-" let &t_SI = "\<Esc>]50;BlinkingCursorEnabled=1;CursorShape=1\x7"
-" Leaving insertion mode
-" let &t_EI = "\<Esc>]50;BlinkingCursorEnabled=0;CursorShape=0\x7"
-" set color when entering in vim
-" silent !konsoleprofile CustomCursorColor=red
-" when leaving vim, reset the konsole profile
-"autocmd VimLeave * silent !konsoleprofile CustomCursorColor=black;BlinkingCursorEnabled=0
-
 "  move text and rehighlight -- vim tip_id=224
 vnoremap > ><CR>gv
 vnoremap < <<CR>gv
+
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
 " undo options
 set undofile
-
+" Manage sessions
+map <F2> :mksession! ~/vim_session <cr> " Quick write session with F2
+map <F3> :source ~/vim_session <cr>     " And load session with F3
 "JSHint
 nnoremap <F6> :w<CR>:JSHint<CR>
 
