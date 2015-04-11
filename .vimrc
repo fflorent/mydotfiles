@@ -10,34 +10,65 @@ set incsearch
 set clipboard=unnamed
 let mapleader=','
 
+"NeoBundle Scripts-----------------------------
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-"""""""""""""""""""""""""""""""""""""""""""
-" Vundle
-set nocompatible              " be iMproved, required
-filetype off                  " required
+  " Required:
+  set runtimepath+=/home/florent/.vim/bundle/neobundle.vim/
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Required:
+call neobundle#begin(expand('/home/florent/.vim/bundle'))
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'walm/jshint.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'jaxbot/github-issues.vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'fugitive.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'fabi1cazenave/suckless.vim'
-Plugin 'junegunn/vim-peekaboo'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'walm/jshint.vim'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'jaxbot/github-issues.vim'
+NeoBundle 'fugitive.vim'
+NeoBundle 'junegunn/vim-peekaboo'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'marijnh/tern_for_vim', {
+      \ 'build' : {
+      \      'others': 'sh -c "cd tern_for_vim && npm install"'
+      \     }
+      \ }
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle 'Valloric/YouCompleteMe', {
+     \ 'build' : {
+     \     'mac' : './install.sh',
+     \     'unix' : './install.sh',
+     \     'windows' : './install.sh',
+     \     'cygwin' : './install.sh'
+     \    }
+     \ }
 
-call vundle#end()
-filetype plugin indent on    " required
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
 
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 " map <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
@@ -60,6 +91,17 @@ nnoremap <space>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
 
+" make YCM compatible with UltiSnips
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical"
+
+" Peekaboo
 let g:peekaboo_window = 'vertical botright 30new'
 "highlight SpecialKey ctermfg=DarkGray ctermbg=yellow
 
@@ -153,7 +195,7 @@ augroup trailing_space
 	autocmd BufWritePre * call RemoveTrailingSpace()
 augroup END
 
-function RemoveTrailingSpace()
+function! RemoveTrailingSpace()
 	if search('\s\+$')
 		let choice = confirm('Trailing spaces found. Remove them?', "&Yes\n&No")
 		if choice == 1
@@ -162,19 +204,19 @@ function RemoveTrailingSpace()
 	endif
 endfunction
 
-function SetFirebugOptions()
+function! SetFirebugOptions()
 	setlocal shiftwidth=4
 	setlocal softtabstop=4
 	setlocal list listchars=trail:_
 	match ErrorMsg '\%>100v.\+'
 endfunction
 
-function SetCVOptions()
+function! SetCVOptions()
 	call SetFirebugOptions()
 	match ErrorMsg ''
 endfunction
 
-function SetFirebugNextOptions()
+function! SetFirebugNextOptions()
 	call SetFirebugOptions()
 	setlocal shiftwidth=2
 	setlocal softtabstop=2
