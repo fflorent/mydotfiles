@@ -8,7 +8,10 @@ set smartcase
 set hlsearch
 set incsearch
 set clipboard=unnamed
-let mapleader=','
+set number
+set relativenumber
+let mapleader=' '
+set synmaxcol=200 " don’t try to highlight super long lines
 
 "NeoBundle Scripts-----------------------------
 if has('vim_starting')
@@ -32,11 +35,18 @@ NeoBundle 'walm/jshint.vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'jaxbot/github-issues.vim'
+" too slow
+" NeoBundle 'jaxbot/github-issues.vim'
 NeoBundle 'fugitive.vim'
 NeoBundle 'junegunn/vim-peekaboo'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'pbrisbin/vim-mkdir'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'fabi1cazenave/kalahari.vim'
+NeoBundle 'fabi1cazenave/suckless.vim'
 NeoBundle 'marijnh/tern_for_vim', {
       \ 'build' : {
       \      'others': 'sh -c "cd tern_for_vim && npm install"'
@@ -69,12 +79,13 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+" execute pathogen for some plugins (still useful?)
+execute pathogen#infect()
 
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 " map <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
 map <C-Left> b
 map <C-Right> e
-syn on
 
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 \ "\<lt>C-n>" :
@@ -83,13 +94,16 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 
 nmap <Backspace> X
+map <F10> <NOP>
 let tern_request_timeout=10
 
-"Unite
-nnoremap <C-P> :Unite -start-insert file_rec/async<cr>
-nnoremap <space>/ :Unite grep:.<cr>
+" Unite
+nnoremap <C-P> :Unite -start-insert file_mru buffer file_rec/async<cr>
+nnoremap // :Unite -start-insert line<CR>
+nnoremap <leader>o :Unite -start-insert outline<CR>
+nnoremap <leader>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
-nnoremap <space>y :Unite history/yank<cr>
+nnoremap <leader>y :Unite history/yank<cr>
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -97,10 +111,12 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
+" kalahari
+
+colorscheme kalahari
+
 " Peekaboo
 let g:peekaboo_window = 'vertical botright 30new'
-"highlight SpecialKey ctermfg=DarkGray ctermbg=yellow
-
 
 " Cursor color
 if !has("gui_running")
@@ -161,6 +177,12 @@ map <F2> :mksession! ~/vim_session <cr> " Quick write session with F2
 map <F3> :source ~/vim_session <cr>     " And load session with F3
 "JSHint
 nnoremap <F6> :w<CR>:JSHint<CR>
+
+" Airline
+let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#enabled=1
+let g:airline_theme='powerlineish'
+set laststatus=2
 
 " Firebug specific
 augroup code_style
