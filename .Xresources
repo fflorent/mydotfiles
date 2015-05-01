@@ -1,5 +1,55 @@
-XTerm*eightBitInput: false
-URxvt.perl-ext-common: default,clipboard,potoman
+URxvt.perl-ext-common: default,clipboard
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+
+! URxvt*letterSpace     : -2
+Urxvt*loginShell      : true
+! URxvt*font            : xft:mensch:size=8
+! URxvt*cursorBlink : true
+URxvt*font:                 xft:Meslo\ LG\ S\ for\ Powerline:regular:pixelsize=11
+
+*saveLines : 32767
+
+!|    Kalahari color theme                                                  <<<
+!|=============================================================================
+
+*fading      : 40
+*fadeColor   : #002233
+*cursorColor : #aa2222
+*background  : #222222
+*foreground  : #eeeedd
+!*pointerColorForeground: #93a1a1
+!*pointerColorBackground: #586e75
+
+! 0: black
+*color0  : #000000
+*color8  : #666666
+
+! 1: red
+*color1  : #cc7777
+*color9  : #cf6171
+
+! 2: green
+*color2  : #00cd00
+*color10 : #c5f779
+
+! 3: yellow
+*color3  : #ffbb66
+*color11 : #fff796
+
+! 4: blue
+*color4  : #22aa99
+*color12 : #bbbbff
+
+! 5: magenta
+*color5  : #ff66cc
+*color13 : #f935f9
+
+! 6: cyan
+*color6  : #88bbbb
+*color14 : #14f0f0
+
+! 7: white
+*color7  : #eeeedd
+*color15 : #ffffee
