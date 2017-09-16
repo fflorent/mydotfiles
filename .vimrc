@@ -17,84 +17,65 @@ if has("nvim")
   set icm=split
 endif
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+set runtimepath+=/home/florent/.config/nvim/bundles/repos/github.com/Shougo/dein.vim/
 
-  " Required:
-  set runtimepath+=/home/florent/.vim/bundle/neobundle.vim/
+if dein#load_state('/home/florent/.config/nvim/bundles')
+  call dein#begin('/home/florent/.config/nvim/bundles')
+
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('sjl/gundo.vim')
+  call dein#add('tpope/vim-surround')
+  " too slow
+  " call dein#add('jaxbot/github-issues.vim')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('junegunn/vim-peekaboo')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
+  call dein#add('pbrisbin/vim-mkdir')
+  call dein#add('bling/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('Shougo/neomru.vim')
+  " call dein#add('Shougo/unite-outline')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('fabi1cazenave/kalahari.vim')
+  call dein#add('fabi1cazenave/suckless.vim')
+  call dein#add('fflorent/macrobug.vim')
+  " call dein#add('ujihisa/unite-locate')
+  " call dein#add('junegunn/vader.vim')
+  call dein#add('carlitux/deoplete-ternjs', {
+        \ 'build': {
+          \ 'mac': 'npm install -g tern',
+          \ 'unix': 'sudo npm install -g tern'
+        \ }})
+  call dein#add('scrooloose/syntastic')
+  " call dein#add('tomtom/tcomment_vim')
+  call dein#add('xolox/vim-misc') " required by vim-session
+  call dein#add('xolox/vim-session', {'depends': 'xolox/vim-misc'})
+  " call dein#add('glts/vim-textobj-comment', {
+  "       \ 'depends': 'kana/vim-textobj-user'
+  "       \ })
+  " call dein#add('marijnh/tern_for_vim', {
+  "       \ 'build' : {
+  "       \      'others': 'sh -c "cd /home/florent/.vim/bundle/tern_for_vim && npm install"'
+  "       \     }
+  "       \ })
+  call dein#add('rust-lang/rust.vim')
+  " call dein#add('Valloric/YouCompleteMe', {
+  "      \ 'build' : {
+  "      \     'mac' : './install.sh',
+  "      \     'unix' : './install.sh',
+  "      \     'windows' : './install.sh',
+  "      \     'cygwin' : './install.sh'
+  "      \    }
+  "      \ })
+  call dein#add('racer-rust/vim-racer')
+
+  call dein#end()
+  call dein#save_state()
 endif
 
 " Required:
-call neobundle#begin(expand('/home/florent/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'Shougo/denite.nvim'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'tpope/vim-surround'
-" too slow
-" NeoBundle 'jaxbot/github-issues.vim'
-NeoBundle 'fugitive.vim'
-NeoBundle 'junegunn/vim-peekaboo'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'pbrisbin/vim-mkdir'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'Shougo/neomru.vim'
-" NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/deoplete.nvim'
-NeoBundle 'fabi1cazenave/kalahari.vim'
-NeoBundle 'fabi1cazenave/suckless.vim'
-NeoBundle 'fflorent/macrobug.vim'
-" NeoBundle 'ujihisa/unite-locate'
-" NeoBundle 'junegunn/vader.vim'
-NeoBundle 'carlitux/deoplete-ternjs', {
-      \ 'build': {
-        \ 'mac': 'npm install -g tern',
-        \ 'unix': 'sudo npm install -g tern'
-      \ }}
-NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'xolox/vim-session', {
-      \ 'depends': 'xolox/vim-misc'
-      \ }
-" NeoBundle 'glts/vim-textobj-comment', {
-"       \ 'depends': 'kana/vim-textobj-user'
-"       \ }
-" NeoBundle 'marijnh/tern_for_vim', {
-"       \ 'build' : {
-"       \      'others': 'sh -c "cd /home/florent/.vim/bundle/tern_for_vim && npm install"'
-"       \     }
-"       \ }
-NeoBundle 'rust-lang/rust.vim'
-" NeoBundle 'Valloric/YouCompleteMe', {
-"      \ 'build' : {
-"      \     'mac' : './install.sh',
-"      \     'unix' : './install.sh',
-"      \     'windows' : './install.sh',
-"      \     'cygwin' : './install.sh'
-"      \    }
-"      \ }
-NeoBundle 'racer-rust/vim-racer'
-
-" Required:
-call neobundle#end()
-
-" Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
-" execute pathogen for some plugins (still useful?)
-execute pathogen#infect()
 
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 " map <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
